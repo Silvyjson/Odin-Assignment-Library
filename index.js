@@ -1,20 +1,19 @@
-// Define default books with a `default` property
+// Define default books
 const defaultBooks = [
-  new Book("To Kill a Mockingbird", "Harper Lee", 281, false, true),
-  new Book("1984", "George Orwell", 328, false, true),
-  new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, false, true),
+  new Book("To Kill a Mockingbird", "Harper Lee", 281, false),
+  new Book("1984", "George Orwell", 328, false),
+  new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, false),
 ];
 
 // Initialize myLibrary with data from localStorage or use defaultBooks
-const myLibrary = JSON.parse(localStorage.getItem("library")) || defaultBooks;
+const myLibrary = JSON.parse(localStorage.getItem("library")) && defaultBooks;
 
-// Book constructor with an optional `default` property
-function Book(title, author, pages, read, isDefault = false) {
+// Book constructor
+function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
-  this.isDefault = isDefault; // Indicates if the book is a default book
 }
 
 // Function to add a book to the library
@@ -54,11 +53,7 @@ function displayBooks() {
         </div>
         <b>${book.pages} PG</b>
         <div>
-          ${
-            !book.isDefault
-              ? '<button class="remove-btn"><span class="mdi mdi-delete"></span></button>'
-              : ""
-          }
+          <button class="remove-btn"><span class="mdi mdi-delete"></span></button>
           <button class="toggle-read-btn">${
             book.read
               ? '<span class="mdi mdi-check"></span>'
@@ -79,14 +74,9 @@ function displayBooks() {
 // Function to remove a book from the library
 function removeBook(e) {
   const index = e.target.closest(".book-card").dataset.index;
-  const book = myLibrary[index];
-
-  if (!book.isDefault) {
-    // Only remove non-default books
-    myLibrary.splice(index, 1);
-    saveLibrary();
-    displayBooks();
-  }
+  myLibrary.splice(index, 1);
+  saveLibrary();
+  displayBooks();
 }
 
 // Function to toggle the read status of a book
