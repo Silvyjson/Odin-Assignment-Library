@@ -257,6 +257,5 @@ li {
 @media screen and (max-width: 500px) {
     #library {
         grid-template-columns: repeat(2, minmax(180px, 1fr));
-        align-items: flex-end;
     }
 }
