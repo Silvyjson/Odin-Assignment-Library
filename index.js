@@ -1,0 +1,112 @@
+const myLibrary = JSON.parse(localStorage.getItem("library")) || [];
+
+function Book(title, author, pages, read) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+}
+
+function addBookToLibrary(book) {
+  myLibrary.push(book);
+  saveLibrary();
+  displayBooks();
+}
+
+function saveLibrary() {
+  localStorage.setItem("library", JSON.stringify(myLibrary));
+}
+
+function displayBooks() {
+  const library = document.getElementById("library");
+  library.innerHTML =
+    '<button id="new-book-btn"><i class="mdi mdi-plus"></i></button>';
+
+  myLibrary.forEach((book, index) => {
+    const bookCard = document.createElement("div");
+    bookCard.classList.add("book-card");
+    bookCard.dataset.index = index;
+
+    bookCard.innerHTML = `
+    <div class='book-design'>
+      ${
+        book.read
+          ? '<div class="markRead"><span class="mdi mdi-read"></span></div>'
+          : ""
+      }
+      <div>
+      <h1>${book.title}</h1>
+      <i>by</i>
+      <h3>${book.author}</h3>
+      </div>
+      <b>${book.pages}PG</b>
+      <div>
+        <button class="remove-btn"><span class="mdi mdi-delete"></span></button>
+        <button class="toggle-read-btn">${
+          book.read
+            ? '<span class="mdi mdi-check"></span>'
+            : '<span class="mdi mdi-book-remove"></span>'
+        }</button>
+      </div>
+    </div>
+    `;
+
+    library.appendChild(bookCard);
+  });
+
+  document.getElementById("new-book-btn").addEventListener("click", () => {
+    formContainer.classList.toggle("hidden");
+  });
+}
+
+function removeBook(e) {
+  const index = e.target.closest(".book-card").dataset.index;
+  myLibrary.splice(index, 1);
+  saveLibrary();
+  displayBooks();
+}
+
+function toggleReadStatus(e) {
+  const index = e.target.closest(".book-card").dataset.index;
+  myLibrary[index].read = !myLibrary[index].read;
+  saveLibrary();
+  displayBooks();
+}
+
+const formContainer = document.getElementById("form-container");
+const bookForm = document.getElementById("book-form");
+
+document.getElementById("pages").addEventListener("input", function (e) {
+  this.value = this.value.replace(/[^0-9]/g, "");
+});
+
+bookForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const title = document.getElementById("title").value;
+  const author = document.getElementById("author").value;
+  const pages = document.getElementById("pages").value;
+  const read = document.getElementById("read").checked;
+
+  const newBook = new Book(title, author, pages, read);
+  addBookToLibrary(newBook);
+
+  bookForm.reset();
+  formContainer.classList.add("hidden");
+});
+
+const handleRemoveBookForm = () => {
+  formContainer.classList.toggle("hidden");
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  displayBooks();
+
+  document.getElementById("library").addEventListener("click", (e) => {
+    if (e.target.closest(".remove-btn")) {
+      removeBook(e);
+    } else if (e.target.closest(".toggle-read-btn")) {
+      toggleReadStatus(e);
+    }
+  });
+});
