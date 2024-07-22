@@ -56,8 +56,8 @@ function displayBooks() {
           <button class="remove-btn"><span class="mdi mdi-delete"></span></button>
           <button class="toggle-read-btn">${
             book.read
-              ? '<span class="mdi mdi-check"></span>'
-              : '<span class="mdi mdi-book-remove"></span>'
+              ? '<span class="mdi mdi-book-remove"></span>'
+              : '<span class="mdi mdi-check"></span>'
           }</button>
         </div>
       </div>
