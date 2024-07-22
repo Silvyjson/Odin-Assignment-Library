@@ -5,7 +5,7 @@ const defaultBooks = [
   new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, false),
 ];
 
-// Initialize myLibrary with data from localStorage or use defaultBooks
+// Initialize myLibrary with data from localStorage and use defaultBooks
 const myLibrary = JSON.parse(localStorage.getItem("library")) && defaultBooks;
 
 // Book constructor
