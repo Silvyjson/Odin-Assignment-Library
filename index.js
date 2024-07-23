@@ -5,8 +5,10 @@ const defaultBooks = [
   new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, false),
 ];
 
-// Initialize myLibrary with data from localStorage and use defaultBooks
-const myLibrary = JSON.parse(localStorage.getItem("library")) && defaultBooks;
+// Initialize myLibrary with data from localStorage, merging with defaultBooks if necessary
+const savedLibrary = JSON.parse(localStorage.getItem("library"));
+const myLibrary =
+  savedLibrary && savedLibrary.length > 0 ? savedLibrary : [...defaultBooks];
 
 // Book constructor
 function Book(title, author, pages, read) {
@@ -18,9 +20,15 @@ function Book(title, author, pages, read) {
 
 // Function to add a book to the library
 function addBookToLibrary(book) {
-  myLibrary.push(book);
-  saveLibrary();
-  displayBooks();
+  // Check if the book already exists in the library
+  const exists = myLibrary.some(
+    (b) => b.title === book.title && b.author === book.author
+  );
+  if (!exists) {
+    myLibrary.push(book);
+    saveLibrary();
+    displayBooks();
+  }
 }
 
 // Function to save the library to localStorage
@@ -51,7 +59,7 @@ function displayBooks() {
           <i>by</i>
           <h3>${book.author}</h3>
         </div>
-        <b>${book.pages} PG</b>
+        <div class='book-page'>${book.pages} PG</div>
         <div>
           <button class="remove-btn"><span class="mdi mdi-delete"></span></button>
           <button class="toggle-read-btn">${

@@ -63,7 +63,8 @@ li {
 
 #library {
     display: grid;
-    grid-template-columns: repeat(5, minmax(180px, 1fr));
+    grid-template-columns: repeat(5, minmax(180px, auto));
+    grid-template-rows: repeat(auto, minmax(220px, 1fr));
     gap: 15px;
     width: 90%;
     height: 80%;
@@ -171,19 +172,24 @@ li {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
     overflow: hidden;
     padding: 20px;
+    font-size: 0.8rem;
 }
 
 .book-design h1 {
     padding-bottom: 5px;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 
-.book-design b {
+.book-design h3 {
+    font-size: 0.98rem;
+}
+
+.book-page {
     bottom: 0;
     left: 0;
     display: flex;
@@ -236,7 +242,7 @@ li {
     }
 }
 
-@media screen and (max-width: 1000px) {
+/* @media screen and (max-width: 1000px) {
     #library {
         grid-template-columns: repeat(4, minmax(180px, 1fr));
     }
@@ -258,4 +264,4 @@ li {
     #library {
         grid-template-columns: repeat(2, minmax(180px, 1fr));
     }
-}
+} */
