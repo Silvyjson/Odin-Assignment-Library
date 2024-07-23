@@ -63,8 +63,8 @@ li {
 
 #library {
     display: grid;
-    grid-template-columns: repeat(5, minmax(180px, auto));
-    grid-template-rows: repeat(auto, minmax(220px, 1fr));
+    grid-template-columns: repeat(5, 180px);
+    grid-template-rows: repeat(auto-fill, 220px);
     gap: 15px;
     width: 90%;
     height: 80%;
@@ -242,9 +242,9 @@ li {
     }
 }
 
-/* @media screen and (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
     #library {
-        grid-template-columns: repeat(4, minmax(180px, 1fr));
+        grid-template-columns: repeat(4, minmax(180px, 180px));
     }
 }
 
@@ -254,7 +254,7 @@ li {
     }
 
     #library {
-        grid-template-columns: repeat(3, minmax(180px, 1fr));
+        grid-template-columns: repeat(3, minmax(180px, 180px));
         width: 100%;
         height: 100%;
     }
@@ -262,6 +262,6 @@ li {
 
 @media screen and (max-width: 500px) {
     #library {
-        grid-template-columns: repeat(2, minmax(180px, 1fr));
+        grid-template-columns: repeat(2, minmax(180px, 180px));
     }
-} */
+}

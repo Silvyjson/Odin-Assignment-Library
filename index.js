@@ -1,8 +1,8 @@
 // Define default books
 const defaultBooks = [
-  new Book("To Kill a Mockingbird", "Harper Lee", 281, false),
+  new Book("To Kill a Mockingbird", "Harper Lee", 281, true),
   new Book("1984", "George Orwell", 328, false),
-  new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, false),
+  new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, true),
 ];
 
 // Initialize myLibrary with data from localStorage, merging with defaultBooks if necessary
