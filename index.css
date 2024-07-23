@@ -65,7 +65,7 @@ li {
     display: grid;
     grid-template-columns: repeat(5, 180px);
     grid-template-rows: repeat(auto-fill, 220px);
-    gap: 15px;
+    gap: 20px;
     width: 90%;
     height: 80%;
     background-color: var(--primary-color);
